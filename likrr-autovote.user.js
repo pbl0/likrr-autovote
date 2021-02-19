@@ -14,13 +14,14 @@ const minutos = 15;
 function vote(article) {
   $.ajax({
     dataType: "html",
-    type: "GET",
+    type: "POST",
     crossDomain: true,
     data: {
       c: c_html,
     },
     url: "/news/ratesec/" + article,
     success: function (data) {
+      console.log(data);
       saveVoted(article);
     },
   });
@@ -28,7 +29,7 @@ function vote(article) {
 
 function getArticles() {
   $.get(likrrUrl, function (data) {
-    // console.log("Missions", data);
+    console.log("Missions", data);
 
     if (data.length == 0) {
       localStorage.setItem("likrr-last-vote", c());
@@ -57,11 +58,21 @@ function saveVoted(article) {
 
   voted.push(article);
 
-  localStorage.setItem("voted", voted);
+  localStorage.setItem("voted", JSON.stringify(voted));
 }
 
 function getVoted() {
-  return JSON.parse(localStorage.getItem("voted"));
+  const tempVoted = localStorage.getItem("voted");
+  let voted
+  if (tempVoted){
+    voted = JSON.parse(tempVoted) ;
+  } else {
+    localStorage.setItem("voted", "[]");
+    voted = [];
+  }
+
+  return voted
+  
 }
 
 $(document).ready(function () {
@@ -74,3 +85,6 @@ $(document).ready(function () {
     getArticles();
   }, minutos * 60 * 1000);
 });
+
+
+

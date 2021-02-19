@@ -5,7 +5,7 @@
 // @description  Autovote for Likrr service
 // @author       Pablo http://github.com/pbl0
 // @match        *://*rivalregions.com/*
-// @updateURL    https://raw.githubusercontent.com/pbl0/likrr_autovote/master/likrr-auto-vote.user.js
+// @updateURL    https://github.com/pbl0/likrr-autovote/raw/main/likrr-autovote.user.js
 // ==/UserScript==
 
 const likrrUrl = "https://gentle-fortress-15688.herokuapp.com/missions";
